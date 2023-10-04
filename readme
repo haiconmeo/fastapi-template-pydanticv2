@@ -1,0 +1,73 @@
+#  FastAPI Project with Pydantic v2 for CamelCase Data Validation
+
+Description:
+FastAPI, a modern, fast (high-performance), web framework for building APIs with Python, is a popular choice for developing RESTful applications. Pydantic, a data validation and parsing library, is often used in conjunction with FastAPI to ensure data integrity and improve API request and response handling. This project leverages the power of FastAPI and the latest version of Pydantic (v2) to validate incoming and outgoing data in CamelCase format.
+
+Key Features:
+
+1. **FastAPI**: Utilizing the capabilities of FastAPI, this project allows you to create robust and highly performant APIs effortlessly. It provides features such as automatic generation of API documentation through OpenAPI and interactive API documentation using Swagger UI.
+
+2. **Pydantic v2**: Pydantic is an integral part of this project and is upgraded to version 2 to benefit from the latest features and improvements. Pydantic allows you to define data models using Python data classes, making it easy to validate and parse incoming JSON payloads.
+
+3. **CamelCase Data Validation**: In modern API development, it's common to use CamelCase for JSON keys. This project enforces CamelCase data validation for both incoming requests and outgoing responses. Pydantic v2 simplifies this process with enhanced support for custom field naming strategies.
+
+4. **Automatic Data Serialization/Deserialization**: FastAPI and Pydantic work seamlessly together to automatically serialize Python objects to JSON when sending responses and deserialize JSON data to Python objects when receiving requests. This ensures data consistency and simplifies the handling of data transformations.
+
+5. **Custom Validators**: Pydantic v2 allows you to define custom validators and preprocessors to perform additional validation or data transformation as needed, enhancing the security and reliability of your API.
+
+6. **Dependency Injection**: Take advantage of FastAPI's powerful dependency injection system to manage dependencies and reusable components throughout your application, improving code organization and maintainability.
+
+7. **Async Support**: FastAPI fully supports asynchronous operations, allowing you to build high-concurrency APIs and leverage Python's async/await features for efficient I/O-bound operations.
+
+8. **JWT Authentication (Optional)**: If needed, you can easily integrate JWT (JSON Web Tokens) authentication into your FastAPI project to secure your endpoints and protect sensitive data.
+
+This FastAPI project with Pydantic v2 integration ensures that your API is not only performant but also maintains data consistency and validation standards by enforcing CamelCase formatting. Whether you're building a RESTful API for a web application, a mobile app, or a microservices architecture, this project provides a solid foundation for your development needs.
+
+## Install Poetry
+
+    curl -sSL https://install.python-poetry.org | python3 -
+    or
+    pip install poetry
+
+## Install library
+
+    poetry config virtualenvs.in-project true
+    poetry install
+
+## pgadmin
+
+    pip3 install psycopg2-binary
+
+## Active library
+
+    poetry shell
+
+## Check data status
+
+    python ./app/backend_pre_start.py
+
+## Run migrations
+
+    alembic upgrade head
+
+## Initial data
+
+    python ./app/initial_data.py
+
+## Start
+
+    uvicorn app.main:app --reload
+
+
+After changing a model (for example, adding a column), inside the container, create a revision, e.g.:
+
+    alembic revision --autogenerate -m "Add customm"
+
+
+
+## celery
+
+    celery -A app.queue_tasks.celery_worker worker --loglevel=info 
+
+
+    celery -A app.queue_tasks.celery_worker flower --port=5555
